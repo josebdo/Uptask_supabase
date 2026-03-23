@@ -94,9 +94,9 @@ export async function getUser() {
         .from('profiles')
         .select('*')
         .eq('id', user.id)
-        .single()
+        .maybeSingle()
 
-    if (profileError) {
+    if (profileError || !profile) {
         // Fallback to auth metadata if profile table query fails
         const userData = {
             _id: user.id,

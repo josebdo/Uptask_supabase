@@ -63,7 +63,7 @@ export async function getTaskById({taskId} : Pick<TaskAPI, 'taskId'>) {
     const mappedCompletions = task.task_completions.map((c: any) => {
         const profile = profiles?.find(p => p.id === c.user_id)
         return {
-            _id: c.id,
+            _id: String(c.id || ''),
             status: c.status,
             user: {
                 _id: String(profile?.id || c.user_id || ''),
@@ -76,9 +76,9 @@ export async function getTaskById({taskId} : Pick<TaskAPI, 'taskId'>) {
     const mappedNotes = task.notes.map((n: any) => {
         const profile = profiles?.find(p => p.id === n.created_by)
         return {
-            _id: n.id,
-            content: n.content,
-            createdAt: n.created_at,
+            _id: String(n.id || ''),
+            content: String(n.content || ''),
+            createdAt: String(n.created_at || ''),
             task: taskId,
             createdBy: {
                 _id: String(profile?.id || n.created_by || ''),
@@ -89,15 +89,15 @@ export async function getTaskById({taskId} : Pick<TaskAPI, 'taskId'>) {
     })
 
     const mappedData = {
-        _id: task.id,
-        name: task.name,
-        description: task.description,
-        project: task.project_id,
+        _id: String(task.id || ''),
+        name: String(task.name || ''),
+        description: String(task.description || ''),
+        project: String(task.project_id || ''),
         status: task.status,
         completedBy: mappedCompletions,
         notes: mappedNotes,
-        createdAt: task.created_at,
-        updatedAt: task.updated_at
+        createdAt: String(task.created_at || ''),
+        updatedAt: String(task.updated_at || '')
     }
 
     const response = taskSchema.safeParse(mappedData)
