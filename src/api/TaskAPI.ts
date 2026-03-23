@@ -104,7 +104,10 @@ export async function getTaskById({taskId} : Pick<TaskAPI, 'taskId'>) {
     if (response.success) {
         return response.data
     }
-    console.error(response.error)
+    
+    if (response.error) {
+        console.error("Zod Validation Error:", response.error.issues);
+    }
     throw new Error("Error al validar la tarea")
 }
 
