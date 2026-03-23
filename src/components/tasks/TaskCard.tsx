@@ -99,7 +99,7 @@ export default function TaskCard({task, canEdit} : TaskCardProps) {
                                     <button 
                                         type='button' 
                                         className='block px-3 py-1 text-sm leading-6 text-red-500'
-                                        onClick={() => mutate({projectId, taskId: task._id})}
+                                        onClick={() => mutate({taskId: task._id})}
                                     >
                                         Eliminar Tarea
                                     </button>

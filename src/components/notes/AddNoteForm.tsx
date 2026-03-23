@@ -4,17 +4,15 @@ import ErrorMessage from "../ErrorMessage"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createNote } from "@/api/NoteAPI"
 import { toast } from "react-toastify"
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 export default function AddNoteForm() {
 
-    const params = useParams()
     const location = useLocation()
 
     const queryParams = new URLSearchParams(location.search)
     const taskId = queryParams.get('viewTask')!
 
-    const projectId = params.projectId!
 
     const initialValues : NoteFormData = {
         content: ''
@@ -36,7 +34,7 @@ export default function AddNoteForm() {
     })
 
     const handleAddNote = (formData: NoteFormData) => {
-        mutate({projectId, taskId, formData})
+        mutate({taskId, formData})
         reset()
     }
 

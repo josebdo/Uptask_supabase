@@ -1,4 +1,4 @@
-import type { ConfirmToken, NewPasswordForm } from "../../types";
+import type { NewPasswordForm } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -7,13 +7,9 @@ import { updatePasswordWithToken } from "@/api/AuthAPIS";
 import { toast } from "react-toastify";
 
 
-type NewPasswordFormProps = {
-    token: ConfirmToken['token']
-
-}
 
 
-export default function NewPasswordForm({token}: NewPasswordFormProps) {
+export default function NewPasswordForm() {
     const navigate = useNavigate()
     const initialValues: NewPasswordForm = {
         password: '',
@@ -35,11 +31,7 @@ export default function NewPasswordForm({token}: NewPasswordFormProps) {
 
 
     const handleNewPassword = (formData: NewPasswordForm) => {
-        const data = {
-            formData,
-            token
-        }
-        mutate(data)
+        mutate({ formData })
     }
 
     const password = watch('password');

@@ -71,7 +71,7 @@ export async function validateToken(_formData : ConfirmToken) {
     return "Token válido" 
 }
 
-export async function updatePasswordWithToken({formData, _token}: {formData: NewPasswordForm, _token: ConfirmToken['token']}) {
+export async function updatePasswordWithToken({formData}: {formData: NewPasswordForm}) {
     const { error } = await supabase.auth.updateUser({
         password: formData.password
     })

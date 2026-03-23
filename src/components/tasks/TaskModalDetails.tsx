@@ -24,7 +24,7 @@ export default function TaskModalDetails() {
 
     const {data, isError, error} = useQuery({
         queryKey: ['task', taskId],
-        queryFn: () => getTaskById({projectId, taskId}),
+        queryFn: () => getTaskById({taskId}),
         enabled: !!taskId,
         retry: false
     })
@@ -44,7 +44,7 @@ export default function TaskModalDetails() {
 
     const handleChance = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const status = e.target.value as TaskStatus
-        const data = {projectId, taskId, status}
+        const data = {taskId, status}
         mutate(data)
         
         
