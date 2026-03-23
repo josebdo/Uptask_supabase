@@ -4,7 +4,7 @@ import {z} from 'zod'
 /**Auth & user  */
 const authSchema = z.object({
     name: z.string(),
-    email: z.string().email(),
+    email: z.string(),
     current_password: z.string(),
     password: z.string(),
     password_confirmation: z.string(),

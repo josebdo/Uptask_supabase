@@ -66,7 +66,7 @@ export async function getTaskById({taskId} : Pick<TaskAPI, 'taskId'>) {
             _id: c.id,
             status: c.status,
             user: {
-                _id: profile?.id || c.user_id,
+                _id: String(profile?.id || c.user_id || ''),
                 name: profile?.name || 'Usuario desconocido',
                 email: profile?.email || ''
             }
@@ -81,7 +81,7 @@ export async function getTaskById({taskId} : Pick<TaskAPI, 'taskId'>) {
             createdAt: n.created_at,
             task: taskId,
             createdBy: {
-                _id: profile?.id || n.created_by,
+                _id: String(profile?.id || n.created_by || ''),
                 name: profile?.name || 'Usuario desconocido',
                 email: profile?.email || ''
             }
